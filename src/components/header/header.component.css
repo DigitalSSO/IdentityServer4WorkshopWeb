@@ -1,0 +1,31 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  background-color: #233;
+  color: white;
+  font-weight: bold;
+  font-size: 1.3em;
+}
+header a {
+  transition: 0.5s all;
+}
+header a:hover {
+  text-shadow: 1px 1px 3px whitesmoke;
+}
+header .logo-container {
+  display: flex;
+  align-items: center;
+}
+header .logo-container img {
+  width: 40px;
+  height: 40px;
+}
+header .logo-container > * {
+  margin-right: 10px;
+}
+header nav > *,
+header .logo-container > * {
+  margin-right: 10px;
+}
