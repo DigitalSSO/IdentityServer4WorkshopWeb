@@ -8,11 +8,15 @@ You have reached the part of the workshop when you have enough knowledge about a
 Postman:
 1. Import file `IdentityServer4Workshop.postman_collection.json` in Postman
 2. Run in `dotnet new is4empty` in your directory
-3. Open Config.cs file and add new Client with the following properties
-	3.1. ClientId
-	3.2. ClientName
-	3.3. AllowedGrantTypes - supporting ResourceOnwerPassword
-	3.4. Client secret
+3. Open `Config.cs` file and add new `Client` with the following properties 
+
+	3.1. `ClientId`
+  
+	3.2. `ClientName`
+  
+	3.3. `AllowedGrantTypes` - supporting `ResourceOwnerPassword`
+  
+	3.4. `Client secret`
 4. Add a test user to `Config.cs`. It functionality is the same as adding a new Client
 5. Add the test user after adding the memory clients by using method AddTestUsers()
 4. Run the application
