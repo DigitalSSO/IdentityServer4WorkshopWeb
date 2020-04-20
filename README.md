@@ -24,28 +24,28 @@ Great job! You have reached the part of the workshop when you have enough knowle
 
 5. Add the test user after adding the memory clients by using method `AddTestUsers()`
 
-4. Run the application
+6. Run the application
 
-5. Open the discovery endpoint `https://localhost:5000/.well-known/openid-configuration`. If the page is not loading you are having problems with your configuration. Revise your work or ask the mentors.
+7. Open the discovery endpoint `https://localhost:5000/.well-known/openid-configuration`. If the page is not loading you are having problems with your configuration. Revise your work or ask the mentors.
 
-6. Find the token endpoint. Paste it in Postman. Add body of the request for client credentials client in `Config.cs`:
+8. Find the token endpoint. Paste it in Postman. Add body of the request for client credentials client in `Config.cs`:
 
-	6.1. Add key `client_id` and its value
+	8.1. Add key `client_id` and its value
   
-	6.2. Add key `client_secret` and its value
+	8.2. Add key `client_secret` and its value
   
-	6.3. Add key `grant_type` and value `password`
+	8.3. Add key `grant_type` and value `password`
   
-	6.5. Add key `username` and the username of the test user
+	8.4. Add key `username` and the username of the test user
   
-	6.6. Add key `password` and the password of the test user
+	8.5. Add key `password` and the password of the test user
   
-	6.7. Execute and see the result
+	8.6. Execute and see the result
   
-7. Find userinfo endpoint
+9. Find userinfo endpoint
 
-	7.1. Add scope `openid` to the client you created in Config.cs
+	9.1. Add scope `openid` to the client you created in Config.cs
   
-	7.2. Generate a new token by using the token endpoint and use it for userinfo endpoint
+	9.2. Generate a new token by using the token endpoint and use it for userinfo endpoint
   
-	7.3. Execute and see the result
+	9.3. Execute and see the result
