@@ -18,7 +18,7 @@ Postman:
   
 	3.4. `Client secret`
 4. Add a test user to `Config.cs`. It functionality is the same as adding a new Client
-5. Add the test user after adding the memory clients by using method AddTestUsers()
+5. Add the test user after adding the memory clients by using method `AddTestUsers()`
 4. Run the application
 5. Open the discovery endpoint `https://localhost:5000/.well-known/openid-configuration`. If the page is not loading you are having problems with your configuration. Revise your work or ask the mentors.
 6. Find the token endpoint. Paste it in Postman. Add body of the request for client credentials client in `Config.cs`:
