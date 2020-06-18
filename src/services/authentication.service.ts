@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { UserManager, User } from 'oidc-client';
 
 const settings: any = {
-  authority: 'https://localhost:44327',
+  authority: 'https://localhost:5001',
   client_id: 'spa',
   redirect_uri: 'http://localhost:4200/assets/oidc-login-redirect.html',
   post_logout_redirect_uri: 'http://localhost:4200/#/?postLogout=true',
@@ -14,102 +14,123 @@ const settings: any = {
   // silentRequestTimeout:10000,
 
   filterProtocolClaims: true,
-  loadUserInfo: true
+  loadUserInfo: true,
 };
 
 @Injectable({
-    providedIn: 'root'
-  })
+  providedIn: 'root',
+})
 export class AuthenticationService {
-    mgr: UserManager = new UserManager(settings);
-    userLoadededEvent: EventEmitter<User> = new EventEmitter<User>();
-    currentUser: User;
-    loggedIn = false;
+  mgr: UserManager = new UserManager(settings);
+  userLoadededEvent: EventEmitter<User> = new EventEmitter<User>();
+  currentUser: User;
+  loggedIn = false;
 
-    authHeaders: Headers;
+  authHeaders: Headers;
 
-    constructor(private http: HttpClient) { 
-      this.mgr.getUser()
+  constructor(private http: HttpClient) {
+    this.mgr
+      .getUser()
       .then((user) => {
         if (user) {
           this.loggedIn = true;
           this.currentUser = user;
           this.userLoadededEvent.emit(user);
-        }
-        else {
+        } else {
           this.loggedIn = false;
         }
       })
       .catch((err) => {
         this.loggedIn = false;
       });
-    }
-    
-    getUserToken() {
-      const data = JSON.parse(sessionStorage.getItem(`token`));
-      return data;
-    }
-  
-    clearState() {
-      this.mgr.clearStaleState().then(function () {
+  }
+
+  getUserToken() {
+    const data = JSON.parse(sessionStorage.getItem(`token`));
+    return data;
+  }
+
+  clearState() {
+    this.mgr
+      .clearStaleState()
+      .then(function () {
         console.log('clearStateState success');
-      }).catch(function (e) {
+      })
+      .catch(function (e) {
         console.log('clearStateState error', e.message);
       });
-    }
-  
-    getUser() {
-      this.mgr.getUser().then((user) => {
+  }
+
+  getUser() {
+    this.mgr
+      .getUser()
+      .then((user) => {
         this.currentUser = user;
         console.log('got user', user);
         this.userLoadededEvent.emit(user);
-      }).catch(function (err) {
+      })
+      .catch(function (err) {
         console.log(err);
       });
-    }
-  
-    removeUser() {
-      this.mgr.removeUser().then(() => {
+  }
+
+  removeUser() {
+    this.mgr
+      .removeUser()
+      .then(() => {
         this.userLoadededEvent.emit(null);
         console.log('user removed');
-      }).catch(function (err) {
+      })
+      .catch(function (err) {
         console.log(err);
       });
-    }
-  
-    startSigninMainWindow() {
-      this.mgr.signinRedirect({ data: 'some data' }).then(function () {
+  }
+
+  startSigninMainWindow() {
+    this.mgr
+      .signinRedirect({ data: 'some data' })
+      .then(function () {
         console.log('signinRedirect done');
-      }).catch(function (err) {
+      })
+      .catch(function (err) {
         console.log(err);
       });
-    }
-    endSigninMainWindow() {
-      this.mgr.signinRedirectCallback().then(function (user) {
+  }
+  endSigninMainWindow() {
+    this.mgr
+      .signinRedirectCallback()
+      .then(function (user) {
         console.log('signed in', user);
-      }).catch(function (err) {
+      })
+      .catch(function (err) {
         console.log(err);
       });
-    }
-  
-    startSignoutMainWindow() {
-      this.mgr.getUser().then(user => {
-        return this.mgr.signoutRedirect({ id_token_hint: user.id_token }).then(resp => {
+  }
+
+  startSignoutMainWindow() {
+    this.mgr.getUser().then((user) => {
+      return this.mgr
+        .signoutRedirect({ id_token_hint: user.id_token })
+        .then((resp) => {
           console.log('signed out', resp);
-      setTimeout(() => {
+          setTimeout(() => {
             console.log('testing to see if fired...');
           }, 5000);
-        }).catch(function (err) {
+        })
+        .catch(function (err) {
           console.log(err);
         });
-      });   
-    };
-  
-    endSignoutMainWindow() {
-      this.mgr.signoutRedirectCallback().then(function (resp) {
+    });
+  }
+
+  endSignoutMainWindow() {
+    this.mgr
+      .signoutRedirectCallback()
+      .then(function (resp) {
         console.log('signed out', resp);
-      }).catch(function (err) {
+      })
+      .catch(function (err) {
         console.log(err);
       });
-    };
+  }
 }
